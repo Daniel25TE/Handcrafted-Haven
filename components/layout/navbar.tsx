@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import "./navbar.css";
 
@@ -11,7 +12,13 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar-container container">
         <Link href="/" className="navbar-logo">
-          Handcrafted Haven
+          <Image
+            src="/handcrafted-haven-logo.png"
+            alt="Handcrafted Haven logo"
+            width={180}
+            height={50}
+            priority
+          />
         </Link>
 
         <button
