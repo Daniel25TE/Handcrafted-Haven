@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e8ddd0;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #4f4f4f;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #88402b;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer a {
+  color: #88402b;
+  font-weight: 600;
+}
