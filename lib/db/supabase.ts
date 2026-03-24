@@ -1,6 +1,9 @@
-// Supabase client singleton
-// Setup:
-//   pnpm add @supabase/supabase-js
-//   Add to .env.local:
-//     NEXT_PUBLIC_SUPABASE_URL=your_project_url
-//     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+import { createBrowserClient } from '@supabase/ssr'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+// For client components
+export function createClient() {
+  return createBrowserClient(supabaseUrl, supabaseAnonKey)
+}
