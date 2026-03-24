@@ -17,7 +17,7 @@ export default function CTASection() {
           <Link href="/shop" className="btn btn-primary">
             Start Shopping
           </Link>
-          <Link href="/signup" className="btn btn-light">
+          <Link href="/register" className="btn btn-light">
             Become a Seller
           </Link>
         </div>
