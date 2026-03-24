@@ -1,27 +1,41 @@
-import "./featuredproducts.css";
+"use client";
 
-const products = [
+import "./featuredproducts.css";
+import ProductCard, { Product } from "../shared/productcard";
+
+const products: Product[] = [
   {
-    id: 1,
+    id: "1",
     name: "Handwoven Basket",
-    price: "$28",
-    description: "A carefully woven storage basket made from natural fibers.",
+    price: 28,
+    image: "/images/basket.jpg",
   },
   {
-    id: 2,
+    id: "2",
     name: "Ceramic Mug",
-    price: "$22",
-    description: "A handmade mug with earthy tones and a rustic finish.",
+    price: 22,
+    image: "/images/mug.jpg",
   },
   {
-    id: 3,
+    id: "3",
     name: "Knitted Scarf",
-    price: "$35",
-    description: "A soft and cozy scarf crafted with comfort and style in mind.",
+    price: 35,
+    image: "/images/scarf.jpg",
   },
 ];
 
 export default function FeaturedProducts() {
+  const products: Product[] = [
+    { id: "1", name: "Handwoven Basket", price: 28, image: "/images/basket.jpg" },
+    { id: "2", name: "Ceramic Mug", price: 22, image: "/images/mug.jpg" },
+    { id: "3", name: "Knitted Scarf", price: 35, image: "/images/scarf.jpg" },
+  ];
+
+  const handleAddToCart = (product: Product) => {
+    const existing = JSON.parse(localStorage.getItem("cart") || "[]");
+    localStorage.setItem("cart", JSON.stringify([...existing, { ...product, quantity: 1 }]));
+  };
+
   return (
     <section className="featured-products">
       <div className="featured-products-container">
@@ -34,15 +48,11 @@ export default function FeaturedProducts() {
 
         <div className="product-grid">
           {products.map((product) => (
-            <article key={product.id} className="product-card">
-              <div className="product-image-placeholder">
-                <span>Product Image</span>
-              </div>
-              <h3>{product.name}</h3>
-              <p className="product-price">{product.price}</p>
-              <p className="product-description">{product.description}</p>
-              <button className="product-button">View Details</button>
-            </article>
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+            />
           ))}
         </div>
       </div>
