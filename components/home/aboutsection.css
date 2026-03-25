@@ -5,6 +5,16 @@
   align-items: center;
 }
 
+.about-content,
+.about-highlight {
+  opacity: 0;
+}
+
+.about-content.show,
+.about-highlight.show {
+  animation: fadeInOnly 3s ease forwards;
+}
+
 .about-content {
   text-align: left;
 }
@@ -20,6 +30,15 @@
 
 .about-text {
   line-height: 1.8;
+}
+
+@keyframes fadeInOnly {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
