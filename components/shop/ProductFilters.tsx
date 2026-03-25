@@ -9,34 +9,33 @@ export default function ProductFilters() {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", e.target.value);
+
     router.push(`/shop?${params.toString()}`);
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("q", e.target.value);
+
     router.push(`/shop?${params.toString()}`);
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 items-center justify-between mt-6">
-      
-      {/* Search */}
+    <div className="flex gap-4 mt-4">
       <input
         type="text"
         placeholder="Search products..."
         onChange={handleSearch}
-        className="w-full md:w-1/3 border rounded-md px-4 py-2"
+        className="border px-4 py-2 rounded-md"
       />
 
-      {/* Sort */}
       <select
         onChange={handleSortChange}
-        className="border rounded-md px-4 py-2"
+        className="border px-4 py-2 rounded-md"
       >
         <option value="featured">Featured</option>
-        <option value="price_asc">Price: Low to High</option>
-        <option value="price_desc">Price: High to Low</option>
+        <option value="price_asc">Price ↑</option>
+        <option value="price_desc">Price ↓</option>
         <option value="rating">Rating</option>
       </select>
     </div>
