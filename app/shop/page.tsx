@@ -4,7 +4,7 @@ import { products } from "@/lib/shop/ListProducts";
 import type { Product } from "@/lib/shop/ListProducts";
 
 type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 function filterAndSort(items: Product[], params: any) {
@@ -47,7 +47,7 @@ function filterAndSort(items: Product[], params: any) {
 }
 
 export default async function ShopPage({ searchParams }: Props) {
-  const params = await searchParams;
+  const params = searchParams;
 
   const items = filterAndSort(products, params);
 
