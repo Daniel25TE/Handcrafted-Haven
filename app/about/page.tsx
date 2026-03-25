@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
+      
       <main>
         <AboutHeroSection />
         <StorySection />
@@ -26,7 +26,7 @@ export default function AboutPage() {
         <ValuesSection />
         <AboutCTASection />
       </main>
-      <Footer />
+      
     </>
   );
 }

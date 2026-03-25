@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Navbar />
+      
 
       <main className="contact-page">
         <section className="contact-hero section">
@@ -68,7 +68,7 @@ export default function ContactPage() {
         </section>
       </main>
 
-      <Footer />
+      
     </>
   );
 }
