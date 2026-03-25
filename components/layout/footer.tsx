@@ -28,7 +28,7 @@ export default function Footer() {
             <ul>
               <li><Link href="/contact">Contact</Link></li>
               <li><Link href="/faq">FAQ</Link></li>
-              <li><Link href="/signup">Sign Up</Link></li>
+              <li><Link href="/register">Sign Up</Link></li>
             </ul>
           </div>
         </div>
