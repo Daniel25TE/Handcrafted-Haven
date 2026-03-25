@@ -1,10 +1,35 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import "./ctasection.css";
 
 export default function CTASection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowContent(true);
+          observer.unobserve(section);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="cta-section section">
-      <div className="cta-container container">
+    <section ref={sectionRef} className="cta-section section">
+      <div className={`cta-container container ${showContent ? "show" : ""}`}>
         <p className="cta-tag section-tag">Join the Community</p>
         <h2>Support Handmade. Share Creativity. Shop with Purpose.</h2>
         <p className="cta-text">

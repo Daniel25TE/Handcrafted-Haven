@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import "./categoriessection.css";
 
 const categories = [
@@ -24,8 +27,30 @@ const categories = [
 ];
 
 export default function CategoriesSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [showCards, setShowCards] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowCards(true);
+          observer.unobserve(section);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="categories-section section">
+    <section ref={sectionRef} className="categories-section section">
       <div className="categories-container container">
         <p className="section-tag">Shop by Category</p>
         <h2>Browse Handmade Collections</h2>
@@ -36,7 +61,10 @@ export default function CategoriesSection() {
 
         <div className="categories-grid">
           {categories.map((category) => (
-            <article key={category.id} className="category-card card">
+            <article
+              key={category.id}
+              className={`category-card card ${showCards ? "show" : ""}`}
+            >
               <h3>{category.title}</h3>
               <p>{category.text}</p>
               <button className="btn btn-primary">Explore</button>

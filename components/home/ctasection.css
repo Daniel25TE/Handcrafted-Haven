@@ -5,6 +5,11 @@
 
 .cta-container {
   max-width: 900px;
+  opacity: 0;
+}
+
+.cta-container.show {
+  animation: fadeInOnly 1.2s ease forwards;
 }
 
 .cta-tag {
@@ -28,4 +33,13 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+@keyframes fadeInOnly {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

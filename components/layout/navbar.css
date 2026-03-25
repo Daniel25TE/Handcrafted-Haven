@@ -1,6 +1,6 @@
 .navbar {
   background-color: #f4efe6;
-  border-bottom: 1px solid #F7F7F7;
+  border-bottom: 1px solid #f7f7f7;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .navbar-logo {
@@ -35,12 +36,46 @@
 
 .navbar-menu a:hover,
 .navbar-menu a:focus {
-  color: #88402B;
+  color: #88402b;
   opacity: 1;
 }
 
+.navbar-actions {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6a4e42;
+  text-decoration: none;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.navbar-cart:hover,
+.navbar-cart:focus {
+  color: #88402b;
+}
+
+.cart-icon {
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+.mobile-cart {
+  display: none;
+}
+
+.desktop-cart {
+  display: inline-flex;
+}
+
 .navbar-login {
-  background-color: #7F3324;
+  background-color: #a64927;
   color: white !important;
   padding: 0.55rem 1rem;
   border-radius: 6px;
@@ -59,12 +94,25 @@
   font-size: 1.8rem;
   color: #6a4e42;
   cursor: pointer;
+  line-height: 1;
+  padding: 0;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
+  .navbar-actions {
+    display: flex;
+  }
+
   .navbar-toggle {
     display: block;
+  }
+
+  .mobile-cart {
+    display: inline-flex;
+  }
+
+  .desktop-cart {
+    display: none;
   }
 
   .navbar-menu {
@@ -77,9 +125,31 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid #F7F7F7;
+    border-bottom: 1px solid #f7f7f7;
     gap: 1rem;
   }
+
+  .cart-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-badge {
+  margin-right: 27px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #b85c38;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
 
   .navbar-menu.active {
     display: flex;

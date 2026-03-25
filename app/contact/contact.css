@@ -1,0 +1,157 @@
+.contact-page {
+  background-color: #fffaf5;
+}
+
+.contact-hero {
+  position: relative;
+  background:
+    linear-gradient(rgba(244, 239, 230, 0.58), rgba(255, 250, 245, 0.7)),
+    url("/contact-hero.png") center center / cover no-repeat;
+  padding: 6rem 1.5rem;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.contact-hero
+{
+    margin-bottom:45px;
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.contact-hero .section-tag {
+  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55),
+    0 2px 6px rgba(122, 74, 50, 0.12);
+}
+
+.contact-hero h1 {
+  margin: 0 auto 1.25rem;
+  color: #7b4a32;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65),
+    0 2px 4px rgba(90, 55, 35, 0.18),
+    0 8px 18px rgba(90, 55, 35, 0.08);
+}
+
+.contact-intro {
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: #4b4038;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.contact-section {
+  padding-top: 1rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-card,
+.contact-info {
+  background-color: #f4efe6;
+  border: 1px solid #d8c4ad;
+  border-radius: 12px;
+}
+
+.contact-card h2,
+.contact-info h2 {
+  margin-bottom: 1rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #6a4e42;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #cbb292;
+  border-radius: 8px;
+  background-color: #fffaf5;
+  color: #4f4f4f;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #a64927;
+  box-shadow: 0 0 0 3px rgba(166, 73, 39, 0.12);
+}
+
+.contact-info p {
+  margin-bottom: 1rem;
+}
+
+.contact-details {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contact-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.captcha-group input {
+  max-width: 220px;
+}
+
+.form-error {
+  color: #b00020;
+  font-weight: 600;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-success {
+  color: #2e7d32;
+  font-weight: 600;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 4.5rem 1.25rem;
+    background-position: center center;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-intro {
+    font-size: 1rem;
+  }
+}
