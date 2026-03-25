@@ -4,7 +4,7 @@ import { products } from "@/lib/shop/ListProducts";
 import type { Product } from "@/lib/shop/ListProducts";
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 function filterAndSort(items: Product[], params: any) {
@@ -20,7 +20,7 @@ function filterAndSort(items: Product[], params: any) {
       ? params.sort
       : "featured";
 
-
+  
   if (q) {
     list = list.filter(
       (p) =>
@@ -30,55 +30,45 @@ function filterAndSort(items: Product[], params: any) {
     );
   }
 
+  
+  switch (sort) {
+    case "price_asc":
+      list.sort((a, b) => a.price - b.price);
+      break;
 
-  if (sort === "price_asc") {
-    list.sort((a, b) => a.price - b.price);
-  }
+    case "price_desc":
+      list.sort((a, b) => b.price - a.price);
+      break;
 
-  if (sort === "price_desc") {
-    list.sort((a, b) => b.price - a.price);
-  }
+    case "rating":
+      list.sort((a, b) => b.rating - a.rating);
+      break;
 
-  if (sort === "rating") {
-    list.sort((a, b) => b.rating - a.rating);
+    default:
+      break;
   }
 
   return list;
 }
 
 export default async function ShopPage({ searchParams }: Props) {
-  const params = searchParams;
+  const params = await searchParams; 
 
   const items = filterAndSort(products, params);
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-10">
-      
-      {/* Title */}
       <h1 className="text-4xl font-bold text-greenfont mb-6">
         Shop Handmade Products
       </h1>
 
-      {/* Filters */}
       <ProductFilters />
 
-      {/* Grid */}
-      {items.length > 0 ? (
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {items.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-20 text-center">
-          <h2 className="text-xl font-semibold text-greenfont">
-            No products found
-          </h2>
-          <p className="text-warmBrown mt-2">
-            Try adjusting your search
-          </p>
-        </div>
-      )}
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {items.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </main>
   );
 }
