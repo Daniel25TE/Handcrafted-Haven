@@ -1,7 +1,7 @@
 "use client";
 
 import "./featuredproducts.css";
-import ProductCard, { Product } from "../shared/productcard";
+import ProductCard, { Product } from "../ui/productcard";
 
 const products: Product[] = [
   {
