@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
 import AboutHeroSection from "@/components/about/herosection";
 import StorySection from "@/components/about/storysection";
 import MissionSection from "@/components/about/missionsection";

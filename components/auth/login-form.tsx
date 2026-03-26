@@ -32,39 +32,40 @@ export default function LoginForm() {
 
   return (
     <section className="section">
-      <div className={`container ${styles.wrapper}`}>
-        <div className={`card ${styles.card}`}>
-          <h1>Sign In</h1>
+      <div className="container">
+        <h1 className={styles.title}>Sign In</h1>
+        <div className={styles.wrapper}>
+          <div className={`card ${styles.card}`}>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <input
+                className={styles.input}
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+              />
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
 
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <input
-              className={styles.input}
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
+              {error && <p className={styles.error}>{error}</p>}
 
-            {error && <p className={styles.error}>{error}</p>}
+              <button className="btn btn-primary" type="submit" disabled={loading}>
+                {loading ? 'Signing in...' : 'Sign In'}
+              </button>
+            </form>
 
-            <button className="btn btn-primary" type="submit" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
-
-          <p className={styles.footer}>
-            Don&apos;t have an account?{' '}
-            <a href={ROUTES.REGISTER}>Create one</a>
-          </p>
+            <p className={styles.footer}>
+              Don&apos;t have an account?{' '}
+              <a href={ROUTES.REGISTER}>Create one</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>

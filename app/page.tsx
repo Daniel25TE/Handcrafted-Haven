@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
 import HeroSection from "@/components/home/herosection";
 import FeaturedProducts from "@/components/home/featuredproducts";
 import CategoriesSection from "@/components/home/categoriessection";
