@@ -1,7 +1,5 @@
 'use server';
 
-// Server Actions for user mutations (register, update profile)
-
 import { revalidatePath } from 'next/cache'
 import { createServerSupabaseClient } from '@/lib/db/supabase-server'
 import { ROUTES } from '@/constants/routes'
@@ -16,7 +14,6 @@ export async function updateProfile(formData: FormData) {
   const email = formData.get('email') as string
   const avatar_url = (formData.get('avatar_url') as string) || null
 
-  // Update email in Supabase Auth if it changed
   if (email !== user.email) {
     const { error: authError } = await supabase.auth.updateUser({ email })
     if (authError) throw new Error(authError.message)
