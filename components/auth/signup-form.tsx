@@ -1,24 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import './signup-form.css';
+import styles from './signup-form.module.css';
 
 export default function SignupForm() {
   const [role, setRole] = useState<'buyer' | 'artisan' | null>(null);
 
   return (
     <section className="section">
-      <div className="container signup-wrapper">
-        
-        <div className="card signup-card">
+      <div className={`container ${styles['signup-wrapper']}`}>
+        <div className={`card ${styles['signup-card']}`}>
           <h1>Create Account</h1>
 
-          <p className="signup-description">
+          <p className={styles['signup-description']}>
             Choose how you want to experience Handcrafted Haven.
           </p>
 
- 
-          <div className="signup-roles">
+          <div className={styles['signup-roles']}>
             <button
               className={`btn ${role === 'buyer' ? 'btn-primary' : 'btn-light'}`}
               onClick={() => setRole('buyer')}
@@ -34,14 +32,13 @@ export default function SignupForm() {
             </button>
           </div>
 
-          {/* FORM */}
-          <form className="signup-form">
-            <input className="signup-input" placeholder="Full Name" />
-            <input className="signup-input" placeholder="Email" />
-            <input className="signup-input" type="password" placeholder="Password" />
+          <form className={styles['signup-form']}>
+            <input className={styles['signup-input']} placeholder="Full Name" />
+            <input className={styles['signup-input']} placeholder="Email" />
+            <input className={styles['signup-input']} type="password" placeholder="Password" />
 
             {role === 'artisan' && (
-              <input className="signup-input" placeholder="Shop Name" />
+              <input className={styles['signup-input']} placeholder="Shop Name" />
             )}
 
             <button className="btn btn-primary" disabled={!role}>

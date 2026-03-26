@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <div className="page-content">{children}</div>
         <Footer />
       </body>
     </html>

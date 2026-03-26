@@ -14,10 +14,5 @@ export default async function AccountPage() {
 
   if (!profile) redirect(ROUTES.LOGIN)
 
-  return (
-    <main className="container section">
-      <h1>My Account</h1>
-      <ProfileCard user={profile} />
-    </main>
-  )
+  return <ProfileCard user={profile} />
 }
