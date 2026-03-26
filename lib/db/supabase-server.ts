@@ -18,8 +18,7 @@ export async function createServerSupabaseClient() {
             cookieStore.set(name, value, options)
           )
         } catch {
-          // Called from a Server Component — cookie writes are ignored here.
-          // Session refresh is handled by middleware.
+          // ignore — cookies can't be set in Server Components
         }
       },
     },
