@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import Button from "@/components/ui/button";
-import { Product } from "@/components/shared/productcard";
+import { Product } from "@/types/product";
 import "./checkout.css";
 
 interface CartItem extends Product {
