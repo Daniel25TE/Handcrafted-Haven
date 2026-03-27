@@ -15,20 +15,20 @@ export default function ProfileCard({ user }: { user: User }) {
               {user.avatar_url ? (
                 <Image
                   src={user.avatar_url}
-                  alt={user.name}
+                  alt={user.first_name ?? 'Avatar'}
                   width={96}
                   height={96}
                   className={styles.avatarImg}
                 />
               ) : (
                 <div className={styles.avatarFallback}>
-                  {user.name.charAt(0).toUpperCase()}
+                  {user.first_name?.charAt(0).toUpperCase() ?? '?'}
                 </div>
               )}
             </div>
 
             <div className={styles.info}>
-              <h2 className={styles.name}>{user.name}</h2>
+              <h2 className={styles.name}>{user.first_name} {user.last_name}</h2>
               <p className={styles.email}>{user.email}</p>
               <span className={`${styles.badge} ${styles[user.role]}`}>
                 {user.role === 'artisan' ? 'Artisan' : 'Buyer'}
