@@ -38,12 +38,24 @@ export default function EditProfileForm({ user }: { user: User }) {
           <div className={`card ${styles.card}`}>
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.field}>
-                <label htmlFor="name" className={styles.label}>Full Name</label>
+                <label htmlFor="first_name" className={styles.label}>First Name</label>
                 <input
-                  id="name"
-                  name="name"
+                  id="first_name"
+                  name="first_name"
                   type="text"
-                  defaultValue={user.name}
+                  defaultValue={user.first_name ?? ''}
+                  className={styles.input}
+                  required
+                />
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="last_name" className={styles.label}>Last Name</label>
+                <input
+                  id="last_name"
+                  name="last_name"
+                  type="text"
+                  defaultValue={user.last_name ?? ''}
                   className={styles.input}
                   required
                 />
