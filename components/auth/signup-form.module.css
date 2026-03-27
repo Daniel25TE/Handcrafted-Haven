@@ -30,3 +30,32 @@
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
+
+.avatar-picker p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.avatar-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.avatar-option {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+  object-fit: cover;
+}
+
+.avatar-selected {
+  border-color: var(--color-primary, #b45309);
+}
+
+.signup-error {
+  color: red;
+  font-size: 0.875rem;
+}
