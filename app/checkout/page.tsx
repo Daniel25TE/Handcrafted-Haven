@@ -16,9 +16,15 @@ export default function CheckoutPage() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
 
+  // Load cart safely
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(stored);
+    try {
+      const stored = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCart(stored);
+    } catch (err) {
+      console.error("Checkout cart load error:", err);
+      setCart([]);
+    }
   }, []);
 
   const total = cart.reduce(
@@ -34,6 +40,7 @@ export default function CheckoutPage() {
       address,
       items: cart,
       total,
+      createdAt: new Date().toISOString(),
     };
 
     console.log("Order submitted:", order);
@@ -43,34 +50,61 @@ export default function CheckoutPage() {
   };
 
   return (
+    <main className="checkout-page">
+      <h1 className="checkout-title">Checkout</h1>
 
-      <main className="checkout-page">
-        <h1 className="checkout-title">Checkout</h1>
+      {/* CART SUMMARY */}
+      <section className="checkout-summary">
+        <h2>Your Items</h2>
 
-        <form className="checkout-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+        {cart.length === 0 ? (
+          <p>Your cart is empty</p>
+        ) : (
+          cart.map((item) => (
+            <div key={item.id} className="checkout-item">
 
-          <br />
-          <br />
+              <img
+                src={item.image_url || "/placeholder.jpg"}
+                alt={item.name}
+                className="checkout-item-image"
+              />
 
-          <input
-            type="text"
-            placeholder="Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
+              <div className="checkout-item-info">
+                <p>{item.name}</p>
+                <p>
+                  {item.quantity} × ${item.price.toFixed(2)}
+                </p>
+              </div>
 
-          <h2 className="checkout-total">Total: ${total.toFixed(2)}</h2>
+            </div>
+          ))
+        )}
+      </section>
 
-          <Button type="submit">Place Order</Button>
-        </form>
-      </main>
+      {/* FORM */}
+      <form className="checkout-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+        />
+
+        <h2 className="checkout-total">
+          Total: ${total.toFixed(2)}
+        </h2>
+
+        <Button type="submit">Place Order</Button>
+      </form>
+    </main>
   );
 }

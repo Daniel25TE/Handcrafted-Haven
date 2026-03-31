@@ -11,7 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="relative h-48 w-full bg-sand">
           <Image
             src={product.images[0] || "/placeholder.jpg"}
-            alt={product.name}
+            alt={product.name || "Product image"}
             fill
             className="object-cover"
           />
@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
           <div className="mt-3 flex items-center justify-between">
             <span className="font-bold text-terracotta">
-              ${product.price}
+              ${product.price.toFixed(2)}
             </span>
 
             <span className="text-sm text-gray-500">
