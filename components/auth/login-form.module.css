@@ -50,3 +50,21 @@
   color: #88402b;
   font-weight: 600;
 }
+
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.showButton {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #7a4a32;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+}

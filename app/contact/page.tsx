@@ -51,10 +51,10 @@ export default function ContactPage() {
                   <p>+63 900 123 4567</p>
                 </div>
 
-                <div>
-                  <h3>Location</h3>
-                  <p>Manila, Philippines</p>
-                </div>
+              <div>
+                <h3>Location</h3>
+                <p>2487 Willow Creek Lane, Salt Lake City, UT 84108</p>
+              </div>
 
                 <div>
                   <h3>Hours</h3>
