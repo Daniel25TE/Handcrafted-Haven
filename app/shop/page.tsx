@@ -1,6 +1,6 @@
 import ProductCard from "@/components/shop/ProductCard";
 import ProductFilters from "@/components/shop/ProductFilters";
-import { products } from "@/lib/shop/ListProducts";
+import { getProducts } from "@/lib/shop/ListProducts";
 import type { Product } from "@/lib/shop/ListProducts";
 
 type Props = {
@@ -52,9 +52,12 @@ function filterAndSort(items: Product[], params: any) {
 }
 
 export default async function ShopPage({ searchParams }: Props) {
-  const params = await searchParams; 
+  const params = await searchParams;
 
-  const items = filterAndSort(products, params);
+  // ✅ FIX: await the async function
+  const productList = await getProducts();
+
+  const items = filterAndSort(productList, params);
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-10">
