@@ -9,19 +9,23 @@ export default function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    async function loadProducts() {
-      const data = await getProducts();
+  async function loadProducts() {
+    const data = await getProducts();
 
-      // ✅ Featured = highest rated products
-      const featured = [...data]
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 2); 
+    const normalized = (data as any[]).map((p) => ({
+      ...p,
+      image: p.image_url || "/placeholder.jpg",
+    }));
 
-      setProducts(featured);
-    }
+    const featured = [...normalized]
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 2);
 
-    loadProducts();
-  }, []);
+    setProducts(featured);
+  }
+
+  loadProducts();
+}, []);
 
   const handleAddToCart = (product: Product) => {
     const existing = JSON.parse(localStorage.getItem("cart") || "[]");
