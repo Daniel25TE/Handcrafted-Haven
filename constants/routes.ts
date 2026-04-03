@@ -10,4 +10,5 @@ export const ROUTES = {
   REGISTER: '/register',
   ACCOUNT: '/account',
   ACCOUNT_EDIT: '/account/edit',
+  ARTISAN_MANAGE: (id: string) => `/artisans/${id}/manage`,
 } as const;

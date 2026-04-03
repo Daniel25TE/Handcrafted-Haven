@@ -1,12 +1,14 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { createServerSupabaseClient } from '@/lib/db/supabase-server';
+import { ROUTES } from '@/constants/routes';
 
 type Props = {
   id: string;
 };
 
 export default async function ArtisanProfileContent({ id }: Props) {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data: artisan, error } = await supabase
     .from('profiles')
@@ -18,6 +20,9 @@ export default async function ArtisanProfileContent({ id }: Props) {
   if (error || !artisan) {
     notFound();
   }
+
+  const { data: { user: currentUser } } = await supabase.auth.getUser();
+  const isOwner = currentUser?.id === artisan.id;
 
   const fullName =
     [artisan.first_name, artisan.last_name].filter(Boolean).join(' ') ||
@@ -46,6 +51,14 @@ export default async function ArtisanProfileContent({ id }: Props) {
           <div className="artisan-profile-section">
             <h2>Location</h2>
             <p>{artisan.address}</p>
+          </div>
+        )}
+
+        {isOwner && (
+          <div className="artisan-profile-section">
+            <Link href={ROUTES.ARTISAN_MANAGE(id)} className="btn btn-primary">
+              Edit My Frontstore
+            </Link>
           </div>
         )}
       </div>
