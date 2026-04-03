@@ -2,26 +2,31 @@
 
 import { useEffect, useRef, useState } from "react";
 import "./categoriessection.css";
+import Link from "next/link";
 
 const categories = [
   {
     id: 1,
-    title: "Home Decor",
+    title: "home-decor",
+    name: "Home Decor",
     text: "Beautiful handmade pieces that bring warmth and character to every space.",
   },
   {
     id: 2,
-    title: "Accessories",
+    title: "accessories",
+    name: "Accessories",
     text: "Thoughtfully crafted wearable items designed for style, comfort, and individuality.",
   },
   {
     id: 3,
-    title: "Kitchen & Dining",
+    title: "Kitchen",
+    name: "Kitchen",
     text: "Functional handcrafted goods that add charm to everyday meals and gatherings.",
   },
   {
     id: 4,
-    title: "Gifts",
+    title: "gifts",
+    name: "Gifts",
     text: "Meaningful handmade treasures perfect for celebrating special moments.",
   },
 ];
@@ -65,9 +70,10 @@ export default function CategoriesSection() {
               key={category.id}
               className={`category-card card ${showCards ? "show" : ""}`}
             >
-              <h3>{category.title}</h3>
+              <h3>{category.name}</h3>
               <p>{category.text}</p>
-              <button className="btn btn-primary">Explore</button>
+              
+              <Link href={`/shop?category=${category.title}`} className="btn btn-primary">Explore</Link>
             </article>
           ))}
         </div>

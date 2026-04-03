@@ -96,7 +96,7 @@ export default function CartPage() {
             <div className="cart-info">
               <h3>{item.name}</h3>
               <p className="price">
-                ${item.price.toFixed(2)}
+                ${Number(item.price || 0).toFixed(2)}
               </p>
             </div>
 
