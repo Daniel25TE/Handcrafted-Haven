@@ -24,6 +24,7 @@ export async function createProduct(formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath(ROUTES.ACCOUNT);
+  revalidatePath(ROUTES.ARTISANS);
 }
 
 export async function updateProduct(productId: string, formData: FormData) {
@@ -48,6 +49,7 @@ export async function updateProduct(productId: string, formData: FormData) {
   if (error) throw new Error(error.message);
 
   revalidatePath(ROUTES.ACCOUNT);
+  revalidatePath(ROUTES.ARTISANS);
 }
 
 export async function deleteProduct(productId: string) {
@@ -65,4 +67,5 @@ export async function deleteProduct(productId: string) {
   if (error) throw new Error(error.message);
 
   revalidatePath(ROUTES.ACCOUNT);
+  revalidatePath(ROUTES.ARTISANS);
 }
