@@ -4,14 +4,8 @@ import React from "react";
 import Link from "next/link";
 import "./productcard.css";
 import Button from "./button";
+import type { Product } from "@/lib/shop/ListProducts";
 
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image?: string;
-  description?: string;
-}
 
 interface ProductCardProps {
   product: Product;
@@ -28,9 +22,9 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <article className={`product-card ${className}`.trim()}>
-      {product.image ? (
+      {product.images?.[0] ?(
         <img
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           className="product-image"
         />
