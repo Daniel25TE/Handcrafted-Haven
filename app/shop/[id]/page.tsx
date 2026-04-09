@@ -2,7 +2,8 @@ import { getProducts } from "@/lib/shop/ListProducts";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import AddToCartButton from "@/components/shop/AddToCartButton"; 
+import AddToCartButton from "@/components/shop/AddToCartButton";
+import ReviewSection from "@/components/reviews/ReviewSection";
 import '../shop.css';
 type Props = {
   params: Promise<{ id: string }>;
@@ -47,7 +48,7 @@ export default async function ProductDetail({ params }: Props) {
               ${Number(product.price).toFixed(2)}
             </span>
             <span className="bg-[#3D4127]/10 text-[#3D4127] px-3 py-1 rounded-full text-sm font-medium">
-              ⭐ {product.rating}
+              {product.rating ? `⭐ ${product.rating}` : 'No reviews yet'}
             </span>
           </div>
 
@@ -69,6 +70,7 @@ export default async function ProductDetail({ params }: Props) {
           </div>
         </div>
       </div>
+      <ReviewSection productId={id} />
     </main>
   );
 }

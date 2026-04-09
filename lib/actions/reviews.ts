@@ -23,7 +23,7 @@ export async function createReview(productId: string, formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath(`/products/${productId}`);
+  revalidatePath(`/shop/${productId}`);
 }
 
 export async function deleteReview(reviewId: string, productId: string) {
@@ -40,5 +40,5 @@ export async function deleteReview(reviewId: string, productId: string) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath(`/products/${productId}`);
+  revalidatePath(`/shop/${productId}`);
 }

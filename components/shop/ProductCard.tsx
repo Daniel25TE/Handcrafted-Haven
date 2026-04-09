@@ -34,8 +34,10 @@ export default function ProductCard({ product }: { product: Product }) {
             ${Number(product.price).toFixed(2)}
           </p>
 
-          {product.rating && (
+          {product.rating ? (
             <span className="product-card-rating">⭐ {product.rating}</span>
+          ) : (
+            <span className="product-card-rating">No reviews yet</span>
           )}
         </div>
 

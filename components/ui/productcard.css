@@ -25,10 +25,26 @@
   margin-bottom: 0.5rem;
 }
 
+.product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
 .product-price {
   color: #88402b;
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin: 0;
+}
+
+.product-rating {
+  color: rgba(61, 65, 39, 0.75);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .product-description {
