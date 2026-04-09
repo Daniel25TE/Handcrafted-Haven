@@ -6,13 +6,19 @@ import ProfileCard from '@/components/account/ProfileCard'
 
 export default async function AccountPage() {
   const supabase = await createServerSupabaseClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) redirect(ROUTES.LOGIN)
 
   const profile = await getUserById(user.id)
 
   if (!profile) redirect(ROUTES.LOGIN)
+
+  if (profile.role === 'admin') {
+    redirect('/admin')
+  }
 
   return <ProfileCard user={profile} />
 }

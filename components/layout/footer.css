@@ -59,6 +59,15 @@
   margin-bottom: 0;
 }
 
+.footer-minimal {
+  padding-top: 0;
+}
+
+.footer-minimal .footer-bottom {
+  border-top: none;
+  padding: 1rem 1.5rem;
+}
+
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
