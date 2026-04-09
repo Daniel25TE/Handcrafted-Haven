@@ -1,7 +1,23 @@
+"use client";
+
 import Link from "next/link";
+import { useNavbarAuth } from "@/lib/navbar/use-navbar-auth";
 import "./footer.css";
 
 export default function Footer() {
+  const { profile, loadingUser } = useNavbarAuth(() => {});
+  const isAdmin = profile?.role === "admin";
+
+  if (loadingUser || isAdmin) {
+    return (
+      <footer className="footer footer-minimal">
+        <div className="footer-bottom">
+          <p>© 2026 Handcrafted Haven. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="footer">
       <div className="footer-container container">

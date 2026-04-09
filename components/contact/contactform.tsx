@@ -1,13 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import { sendContactMessage } from "@/lib/actions/messages";
+import { initialContactMessageActionState } from "@/lib/data/messages";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  profileId: string | null;
+  initialFullName: string;
+  initialEmail: string;
+};
+
+export default function ContactForm({
+  profileId,
+  initialFullName,
+  initialEmail,
+}: ContactFormProps) {
+  const [state, formAction, pending] = useActionState(
+    sendContactMessage,
+    initialContactMessageActionState
+  );
+
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [captchaAnswer, setCaptchaAnswer] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
 
   const generateCaptcha = () => {
     const first = Math.floor(Math.random() * 10) + 1;
@@ -21,37 +39,65 @@ export default function ContactForm() {
     generateCaptcha();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (state.success) {
+      formRef.current?.reset();
 
+      const fullNameInput = formRef.current?.elements.namedItem(
+        "fullName"
+      ) as HTMLInputElement | null;
+      const emailInput = formRef.current?.elements.namedItem(
+        "email"
+      ) as HTMLInputElement | null;
+
+      if (fullNameInput) {
+        fullNameInput.value = profileId ? initialFullName : "";
+      }
+
+      if (emailInput) {
+        emailInput.value = profileId ? initialEmail : "";
+      }
+
+      setCaptchaError("");
+      generateCaptcha();
+    }
+  }, [state.success, profileId, initialFullName, initialEmail]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const expected = num1 + num2;
 
     if (Number(captchaAnswer) !== expected) {
-      setError("Incorrect captcha answer. Please try again.");
-      setSuccess("");
+      e.preventDefault();
+      setCaptchaError("Incorrect captcha answer. Please try again.");
       generateCaptcha();
       return;
     }
 
-    setError("");
-    setSuccess("Message submitted successfully.");
-    generateCaptcha();
-
-    e.currentTarget.reset();
-    setCaptchaAnswer("");
+    setCaptchaError("");
   };
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
+    <form
+      ref={formRef}
+      className="contact-form"
+      action={formAction}
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="profileId" value={profileId ?? ""} />
+
       <div className="form-group">
-        <label htmlFor="name">Full Name</label>
+        <label htmlFor="fullName">Full Name</label>
         <input
           type="text"
-          id="name"
-          name="name"
+          id="fullName"
+          name="fullName"
           placeholder="Your full name"
+          defaultValue={initialFullName}
           required
         />
+        {state.fieldErrors?.fullName ? (
+          <p className="form-error">{state.fieldErrors.fullName}</p>
+        ) : null}
       </div>
 
       <div className="form-group">
@@ -61,8 +107,12 @@ export default function ContactForm() {
           id="email"
           name="email"
           placeholder="you@example.com"
+          defaultValue={initialEmail}
           required
         />
+        {state.fieldErrors?.email ? (
+          <p className="form-error">{state.fieldErrors.email}</p>
+        ) : null}
       </div>
 
       <div className="form-group">
@@ -74,6 +124,9 @@ export default function ContactForm() {
           placeholder="How can we help?"
           required
         />
+        {state.fieldErrors?.subject ? (
+          <p className="form-error">{state.fieldErrors.subject}</p>
+        ) : null}
       </div>
 
       <div className="form-group">
@@ -84,7 +137,10 @@ export default function ContactForm() {
           rows={6}
           placeholder="Write your message here..."
           required
-        ></textarea>
+        />
+        {state.fieldErrors?.message ? (
+          <p className="form-error">{state.fieldErrors.message}</p>
+        ) : null}
       </div>
 
       <div className="form-group captcha-group">
@@ -102,11 +158,16 @@ export default function ContactForm() {
         />
       </div>
 
-      {error && <p className="form-error">{error}</p>}
-      {success && <p className="form-success">{success}</p>}
+      {captchaError ? <p className="form-error">{captchaError}</p> : null}
 
-      <button type="submit" className="btn btn-primary">
-        Send Message
+      {state.message ? (
+        <p className={state.success ? "form-success" : "form-error"}>
+          {state.message}
+        </p>
+      ) : null}
+
+      <button type="submit" className="btn btn-primary" disabled={pending}>
+        {pending ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

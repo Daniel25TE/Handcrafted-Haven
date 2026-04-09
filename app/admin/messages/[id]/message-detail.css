@@ -1,0 +1,86 @@
+.admin-message-detail-page {
+  padding: 3rem 1.5rem 4rem;
+  background: #f8f5f1;
+  min-height: 100vh;
+}
+
+.admin-message-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.admin-message-detail-card,
+.admin-message-reply-card {
+  background: #fff;
+  border: 1px solid #e5ddd5;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.admin-message-detail-card h1,
+.admin-message-reply-card h2 {
+  margin-top: 0;
+  color: #6f3f28;
+}
+
+.admin-message-detail-meta {
+  margin: 0 0 0.75rem;
+  color: #4b5563;
+}
+
+.admin-message-detail-body {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee3d8;
+  color: #374151;
+  line-height: 1.7;
+}
+
+.admin-reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #5b3727;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #d8cfc6;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  background: #fffdfb;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.admin-reply-button {
+  align-self: flex-start;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.25rem;
+  background: #7a4a32;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-reply-button:hover {
+  background: #623824;
+}

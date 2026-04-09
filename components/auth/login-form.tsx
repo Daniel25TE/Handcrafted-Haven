@@ -14,6 +14,29 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  async function redirectByRole(userId: string) {
+    const supabase = createClient();
+
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', userId)
+      .single();
+
+    if (profileError || !profile) {
+      console.error('Error loading profile role:', profileError);
+      router.replace(ROUTES.ACCOUNT);
+      return;
+    }
+
+    if (profile.role === 'admin') {
+      router.replace('/admin');
+      return;
+    }
+
+    router.replace(ROUTES.ACCOUNT);
+  }
+
   useEffect(() => {
     async function checkExistingSession() {
       const supabase = createClient();
@@ -25,7 +48,7 @@ export default function LoginForm() {
       console.log('Login page user:', user);
 
       if (user) {
-        router.replace(ROUTES.ACCOUNT);
+        await redirectByRole(user.id);
       }
     }
 
@@ -59,18 +82,18 @@ export default function LoginForm() {
       emailToUse = profile.email;
     }
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({
       email: emailToUse,
       password,
     });
 
-    if (signInError) {
+    if (signInError || !data.user) {
       setError('Invalid email/username or password.');
       setLoading(false);
       return;
     }
 
-    router.push(ROUTES.ACCOUNT);
+    await redirectByRole(data.user.id);
   }
 
   return (

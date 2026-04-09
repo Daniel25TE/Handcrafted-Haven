@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "@/components/layout/navbar";
+import Navbar from "@/components/layout/navbar/navbar";
 import Footer from "@/components/layout/footer";
 import Button from "@/components/ui/button";
 import { Product } from "@/types/product";
