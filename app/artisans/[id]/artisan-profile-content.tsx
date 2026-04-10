@@ -32,6 +32,7 @@ export default async function ArtisanProfileContent({ id }: Props) {
 
   const normalizedProducts = (products ?? []).map((item: any) => ({
     id: item.id,
+    seller_id: item.seller_id,
     name: item.name,
     description: item.description,
     price: item.price,
