@@ -34,7 +34,14 @@ export default function ProductCard({
 
       <div className="product-info">
         <h3>{product.name}</h3>
-        <p className="product-price">${product.price}</p>
+        <div className="product-meta">
+          <p className="product-price">${product.price}</p>
+          {product.rating ? (
+            <span className="product-rating">⭐ {product.rating}</span>
+          ) : (
+            <span className="product-rating">No reviews yet</span>
+          )}
+        </div>
 
         {variant === "home" && product.description && (
           <p className="product-description">{product.description}</p>

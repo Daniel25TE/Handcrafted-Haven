@@ -6,7 +6,7 @@ export async function getReviewsByProduct(productId: string): Promise<Review[]> 
 
   const { data, error } = await supabase
     .from('reviews')
-    .select('*')
+    .select('*, profiles(username, first_name, last_name, avatar_url)')
     .eq('product_id', productId)
     .order('created_at', { ascending: false });
 
