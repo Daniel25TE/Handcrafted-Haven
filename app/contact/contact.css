@@ -2,6 +2,11 @@
   background-color: #fffaf5;
 }
 
+
+.text{
+  width: auto;
+}
+
 .contact-hero {
   position: relative;
   background:
