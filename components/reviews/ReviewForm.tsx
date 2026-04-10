@@ -2,28 +2,44 @@
 
 import { useState, useRef } from 'react';
 import { createReview } from '@/lib/actions/reviews';
+import { useNavbarAuth } from '@/lib/navbar/use-navbar-auth';
 
 type Props = {
   productId: string;
 };
 
 export default function ReviewForm({ productId }: Props) {
+  const { profile, loadingUser } = useNavbarAuth();
   const [rating, setRating] = useState(0);
   const [hovered, setHovered] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
+  // Do not render anything until auth is fully loaded
+  if (loadingUser) {
+    return null;
+  }
+
+  // Hide for admin
+  if (profile?.role === 'admin') {
+    return null;
+  }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (!rating) {
       setError('Pick a rating first.');
       return;
     }
+
     setError('');
     setLoading(true);
+
     const formData = new FormData(e.currentTarget);
     formData.set('rating', String(rating));
+
     try {
       await createReview(productId, formData);
       formRef.current?.reset();
