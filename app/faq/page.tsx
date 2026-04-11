@@ -13,10 +13,6 @@ const faqs = [
     answer: "Click on the 'Sign Up' button in the top right corner and fill out the registration form."
   },
   {
-    question: "How do I reset my password?",
-    answer: "Click on the 'Forgot Password' link on the login page and follow the instructions to reset your password."
-  },
-  {
     question: "How do I contact customer support?",
     answer: "You can reach out to our customer support team via the 'Contact' page. we will be more than happy to assist you with any questions or issues you may have."
   },
@@ -35,7 +31,6 @@ const faqs = [
 
 export default function FAQPage() {
     const[openIndex, setOpenIndex] = useState<number | null>(null);
-
 
       return (
     <div className="faq-container section">
