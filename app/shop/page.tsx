@@ -1,4 +1,3 @@
-import { createServerSupabaseClient } from '@/lib/db/supabase-server';
 import ProductCard from "@/components/shop/ProductCard";
 import ProductFilters from "@/components/shop/ProductFilters";
 import { getProducts } from "@/lib/shop/ListProducts";
@@ -64,19 +63,8 @@ function filterAndSort(products: any[], params: any) {
 
 export default async function ShopPage({ searchParams }: Props) {
   const params = await searchParams;
-  const supabase = await createServerSupabaseClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   const products = await getProducts();
-
-  const visibleProducts = user
-    ? products.filter((product) => product.seller_id !== user.id)
-    : products;
-
-  const items = filterAndSort(visibleProducts, params);
+  const items = filterAndSort(products, params);
 
   return (
     <main className="shop-page">
